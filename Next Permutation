@@ -1,0 +1,33 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution 
+{
+	public static ArrayList<Integer> nextPermutation(ArrayList<Integer> a) 
+	{
+		ArrayList<Integer> ans=new ArrayList<>();
+		int ind=-1,min=10000,j=-1,n=a.size();
+		for(int i=n-1; i>0; i--) {
+			if(min>a.get(i)) {
+				min=a.get(i); j=i;
+			}
+			if(a.get(i)>a.get(i-1)) {
+				ind=i-1; break;
+			}
+		}
+		for(int i=n-1; i>=ind && ind!=-1; i--) {
+            if(a.get(i)>a.get(ind)) {
+                int temp=a.get(i); a.set(i,a.get(ind)); a.set(ind,temp);
+				break;
+            }
+        }
+		
+		
+		//System.out.println(a.get(j)+" "+a.get(ind));
+		Collections.sort(a.subList(ind+1,n));
+		//for(int i:a) System.out.println(i);
+		return a;
+	}
+}
