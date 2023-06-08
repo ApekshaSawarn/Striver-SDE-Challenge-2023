@@ -1,0 +1,29 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) {
+        int xor=0;
+        for(int i=0; i<n; i++) {
+            xor^=arr.get(i); xor^=(i+1);
+        }
+        int num=(xor&~(xor-1));
+        int one=0,zero=0;
+        for(int i=0; i<n; i++) {
+            if((arr.get(i)&num) != 0) one^=arr.get(i);
+            else zero^=arr.get(i);
+        }
+        for(int i=1; i<=n; i++) {
+            if((i&num) != 0) one^=i;
+            else zero^=i;
+        }
+        int cnt=0;
+        for(int i=0; i<n; i++) {
+            if(arr.get(i)==zero) cnt++;
+        }
+        if (cnt == 2) return new int[] {one, zero};
+        return new int[] {zero, one};
+    }
+}
