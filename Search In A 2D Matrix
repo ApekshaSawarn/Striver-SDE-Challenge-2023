@@ -1,0 +1,13 @@
+import java.util.ArrayList;
+public class Solution {
+    static boolean searchMatrix(ArrayList<ArrayList<Integer>> mat, int target) {
+        int n=mat.size(),m=mat.get(0).size();
+        int ro=0,co=m-1;
+        while(ro<n && co>=0) {
+            if(mat.get(ro).get(co)==target) return true;
+            else if(mat.get(ro).get(co)>target) co--;
+            else ro++;
+        }
+        return false;
+    }
+}
